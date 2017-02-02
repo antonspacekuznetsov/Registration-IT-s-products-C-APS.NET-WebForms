@@ -1,0 +1,7 @@
+c:\users\administrator\documents\visual studio 2012\Projects\RegITProducts\RegITProducts\bin\RegITProducts.dll
+c:\users\administrator\documents\visual studio 2012\Projects\RegITProducts\RegITProducts\bin\RegITProducts.pdb
+c:\users\administrator\documents\visual studio 2012\Projects\RegITProducts\RegITProducts\obj\Debug\RegITProducts.dll
+c:\users\administrator\documents\visual studio 2012\Projects\RegITProducts\RegITProducts\obj\Debug\RegITProducts.pdb
+c:\users\administrator\documents\visual studio 2012\Projects\RegITProducts\RegITProducts\bin\EntityFramework.dll
+c:\users\administrator\documents\visual studio 2012\Projects\RegITProducts\RegITProducts\bin\EntityFramework.xml
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\RegITProducts\RegITProducts\obj\Debug\RegITProducts.csprojResolveAssemblyReference.cache

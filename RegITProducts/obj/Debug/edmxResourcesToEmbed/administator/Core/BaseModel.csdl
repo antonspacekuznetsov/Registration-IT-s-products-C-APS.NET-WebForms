@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ItProductsModel1" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ItProductsEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="ItProductsModel1.Category" />
+    <EntitySet Name="Products" EntityType="ItProductsModel1.Product" />
+    <EntitySet Name="TANs" EntityType="ItProductsModel1.TAN" />
+    <AssociationSet Name="FK_Products_Category" Association="ItProductsModel1.FK_Products_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TANs_Products" Association="ItProductsModel1.FK_TANs_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="TANs" EntitySet="TANs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Products" Relationship="ItProductsModel1.FK_Products_Category" FromRole="Category" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="ItProductsModel1.FK_Products_Category" FromRole="Products" ToRole="Category" />
+    <NavigationProperty Name="TANs" Relationship="ItProductsModel1.FK_TANs_Products" FromRole="Products" ToRole="TANs" />
+  </EntityType>
+  <EntityType Name="TAN">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TanCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="ItProductsModel1.FK_TANs_Products" FromRole="TANs" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK_Products_Category">
+    <End Role="Category" Type="ItProductsModel1.Category" Multiplicity="1" />
+    <End Role="Products" Type="ItProductsModel1.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TANs_Products">
+    <End Role="Products" Type="ItProductsModel1.Product" Multiplicity="1" />
+    <End Role="TANs" Type="ItProductsModel1.TAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TANs">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

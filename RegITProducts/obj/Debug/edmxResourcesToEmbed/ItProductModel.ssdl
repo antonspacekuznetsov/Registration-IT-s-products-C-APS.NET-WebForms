@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ItProductsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ItProductsModelStoreContainer">
+    <EntitySet Name="Category" EntityType="ItProductsModel.Store.Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="ItProductsModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RegisterData" EntityType="ItProductsModel.Store.RegisterData" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TANs" EntityType="ItProductsModel.Store.TANs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Products_Category" Association="ItProductsModel.Store.FK_Products_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RegisterData_Products" Association="ItProductsModel.Store.FK_RegisterData_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="RegisterData" EntitySet="RegisterData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RegisterData_TANs" Association="ItProductsModel.Store.FK_RegisterData_TANs">
+      <End Role="TANs" EntitySet="TANs" />
+      <End Role="RegisterData" EntitySet="RegisterData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TANs_Products" Association="ItProductsModel.Store.FK_TANs_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="TANs" EntitySet="TANs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegisterData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="birth" Type="date" Nullable="false" />
+    <Property Name="adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="productInfo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="buydate" Type="date" Nullable="false" />
+    <Property Name="registerdate" Type="date" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="TANId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TANs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TanCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Products_Category">
+    <End Role="Category" Type="ItProductsModel.Store.Category" Multiplicity="1" />
+    <End Role="Products" Type="ItProductsModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RegisterData_Products">
+    <End Role="Products" Type="ItProductsModel.Store.Products" Multiplicity="1" />
+    <End Role="RegisterData" Type="ItProductsModel.Store.RegisterData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegisterData">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RegisterData_TANs">
+    <End Role="TANs" Type="ItProductsModel.Store.TANs" Multiplicity="1" />
+    <End Role="RegisterData" Type="ItProductsModel.Store.RegisterData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TANs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RegisterData">
+        <PropertyRef Name="TANId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TANs_Products">
+    <End Role="Products" Type="ItProductsModel.Store.Products" Multiplicity="1" />
+    <End Role="TANs" Type="ItProductsModel.Store.TANs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TANs">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
